@@ -19,8 +19,7 @@ private:
 	gender m_gender;
 
 public:
-	Client(std::string_view name, int8_t age, gender gender)
-		: m_name(name), m_age(age), m_gender(gender)
+	Client(std::string_view name, int8_t age, gender gender) : m_name(name), m_age(age), m_gender(gender)
 	{
 		if (m_age <= 0)
 			throw std::logic_error{"Неправильно указан возраст!"};
@@ -29,10 +28,7 @@ public:
 	/*Запрет на дублирование клиента*/
 	Client(Client const &) = delete;
 
-	Client(Client && o)
-		: m_name(o.m_name), m_age(o.m_age), m_gender(o.m_gender)
-	{
-	}
+	Client(Client && o) : m_name(o.m_name), m_age(o.m_age), m_gender(o.m_gender) {}
 
 	Client & operator=(Client && o)
 	{

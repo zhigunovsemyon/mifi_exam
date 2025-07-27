@@ -8,6 +8,7 @@ class Base {
 
 public:
 	Base() noexcept : m_id{m_id_max++} {}
+
 	int id() const noexcept { return m_id; }
 };
 

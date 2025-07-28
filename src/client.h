@@ -8,7 +8,7 @@ namespace skipass {
 
 class Client {
 public:
-	enum class gender {
+	enum class gender : int8_t {
 		male,
 		female
 	};
@@ -25,19 +25,23 @@ public:
 			throw std::logic_error{"Неправильно указан возраст!"};
 	}
 
-	/*Запрет на дублирование клиента*/
-	Client(Client const &) = delete;
+	Client(Client const &) : m_name(o.m_name), m_age(o.m_age), m_gender(o.m_gender) {}
 
-	Client(Client && o) : m_name(o.m_name), m_age(o.m_age), m_gender(o.m_gender) {}
+	Client(Client && o) noexcept : m_name(std::move(o.m_name)), m_age(o.m_age), m_gender(o.m_gender) {}
 
-	Client & operator=(Client && o)
+	Client & operator=(Client && o) noexcept
+	{
+		m_name = std::move(o.m_name), m_gender = o.m_gender, m_age = o.m_age;
+
+		return *this;
+	}
+
+	Client & operator=(Client const &)
 	{
 		m_name = o.m_name, m_gender = o.m_gender, m_age = o.m_age;
 
 		return *this;
 	}
-
-	Client & operator=(Client const &) = delete;
 
 	std::string_view name() const { return m_name; }
 

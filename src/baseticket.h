@@ -7,9 +7,9 @@ class Base {
 	static int m_id_max; // от нуля (см. baseticket.cc)
 
 public:
-	Base() noexcept : m_id{m_id_max++} {}
+	Base() noexcept;
 
-	int id() const noexcept { return m_id; }
+	int id() const noexcept;
 };
 
 } // namespace skipass::Ticket

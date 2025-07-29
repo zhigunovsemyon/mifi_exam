@@ -12,7 +12,7 @@ class RideLimited : public Expirable {
 public:
 	~RideLimited() override = default;
 
-	RideLimited() : m_ridesRemainder(sm_ridesOfTicket) {}
+	RideLimited(pClient_t client) : Expirable(client), m_ridesRemainder(sm_ridesOfTicket) {}
 
 	constexpr money_t price() const override { return sm_price; }
 

@@ -1,14 +1,25 @@
-#include "baseticket.h"
+#include "client.h"
+#include "timelimitedticket.h"
+#include "ridelimitedticket.h"
 #include <cstdlib>
 #include <exception>
+#include <memory>
 #include <print>
 
 int main()
 try {
-	for (int i{}; i < 100; ++i) {
-		std::print("id:{} ", skipass::Ticket::Base{}.id());
-	}
-	std::println("Hello World");
+	auto x = std::make_shared<skipass::Client>(skipass::Client{"s",1,skipass::Client::gender::female});
+	skipass::Ticket::RideLimited tl{x};
+	std::print("remainder:{}\n", tl.remainder());
+
+	auto exch = tl.refill(200);
+	std::print("remainder:{}, exchange:{}\n", tl.remainder(), exch);
+
+	exch = tl.refill(320);
+	std::print("remainder:{}, exchange:{}\n", tl.remainder(), exch);
+
+	exch = tl.refill(720);
+	std::print("remainder:{}, exchange:{}\n", tl.remainder(), exch);
 	return EXIT_SUCCESS;
 } catch (std::exception const & e) {
 	std::println(stderr, "Исключение с сообщением: {}", e.what());

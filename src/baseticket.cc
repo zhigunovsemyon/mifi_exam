@@ -2,7 +2,7 @@
 
 namespace skipass::Ticket {
 
-Base::Base() noexcept : m_id{m_id_max++} {}
+Base::Base(pClient_t client) noexcept : m_id{m_id_max++} , m_pClient{client}{}
 
 int Base::id() const noexcept
 {

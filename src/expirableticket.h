@@ -8,6 +8,8 @@ class Expirable : public Base {
 public:
 	using change_t = money_t;
 
+	Expirable(pClient_t client) : Base{client} {}
+
 	~Expirable() = default;
 
 	// Пополнение билета с возвращением сдачи

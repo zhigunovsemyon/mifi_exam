@@ -13,8 +13,9 @@ class TimeLimited : public Expirable {
 public:
 	~TimeLimited() override = default;
 
-	TimeLimited()
-		: m_expireDate(sm_timeOfTicket +
+	TimeLimited(pClient_t client)
+		: Expirable(client),
+		  m_expireDate(sm_timeOfTicket +
 			       std::chrono::time_point_cast<std::chrono::seconds>(std::chrono::system_clock::now()))
 	{
 	}

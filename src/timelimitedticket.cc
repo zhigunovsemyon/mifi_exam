@@ -18,7 +18,7 @@ Expirable::change_t TimeLimited::refill(money_t m)
 std::string TimeLimited::remainder() const
 {
 	auto now = std::chrono::time_point_cast<std::chrono::seconds>(std::chrono::system_clock::now());
-	return std::format("Осталось: {:%T}", m_expireDate - now);
+	return std::format("{:%T}", m_expireDate - now);
 }
 
 } // namespace skipass::Ticket

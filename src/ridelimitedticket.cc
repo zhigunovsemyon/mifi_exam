@@ -16,7 +16,7 @@ Expirable::change_t RideLimited::refill(money_t m)
 // Остаток в виде строки
 std::string RideLimited::remainder() const
 {
-	return std::format("Осталось: {}", m_ridesRemainder);
+	return std::format("{}", m_ridesRemainder);
 }
 
 } // namespace skipass::Ticket

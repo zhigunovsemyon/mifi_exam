@@ -4,10 +4,10 @@
 
 namespace skipass::Ticket {
 
-class Expirable : Base {
+class Expirable : public Base {
+public:
 	using change_t = money_t;
 
-public:
 	~Expirable() = default;
 
 	// Пополнение билета с возвращением сдачи
@@ -17,4 +17,4 @@ public:
 	virtual std::string remainder() const = 0;
 };
 
-}
+} // namespace skipass::Ticket

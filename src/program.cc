@@ -25,7 +25,7 @@ void Program::run()
 				m_manager.adduser(*usr);
 		} break;
 		case Mode::USERDEL:
-			std::println("USERDEL mode");
+			m_manager.deluser();
 			break;
 		case Mode::USERPREV:
 			m_manager.nextuser();

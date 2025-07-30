@@ -2,6 +2,7 @@
 #include "client.h"
 
 #include <memory>
+#include <optional>
 namespace skipass::Ticket {
 
 class Base {
@@ -14,6 +15,7 @@ private:
 	static int m_id_max; // от нуля (см. baseticket.cc)
 
 	pClient_t m_pClient;
+	int m_cellid{-1};
 
 public:
 	virtual ~Base() = default;
@@ -25,6 +27,8 @@ public:
 
 
 	int ticket_id() const noexcept;
+
+	std::optional<int> cell_id() const noexcept;
 };
 
 } // namespace skipass::Ticket

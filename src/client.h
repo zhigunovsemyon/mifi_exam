@@ -31,24 +31,6 @@ public:
 			m_age = (int8_t)age;
 	}
 
-	Client(Client const &o) : m_name(o.m_name), m_age(o.m_age), m_gender(o.m_gender) {}
-
-	Client(Client && o) noexcept : m_name(std::move(o.m_name)), m_age(o.m_age), m_gender(o.m_gender) {}
-
-	Client & operator=(Client && o) noexcept
-	{
-		m_name = std::move(o.m_name), m_gender = o.m_gender, m_age = o.m_age;
-
-		return *this;
-	}
-
-	Client & operator=(Client const &o)
-	{
-		m_name = o.m_name, m_gender = o.m_gender, m_age = o.m_age;
-
-		return *this;
-	}
-
 	std::string_view name() const { return m_name; }
 
 	int8_t age() const noexcept { return m_age; }

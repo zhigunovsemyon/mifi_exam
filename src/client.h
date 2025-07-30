@@ -42,6 +42,12 @@ public:
 	int8_t age() const noexcept { return m_age; }
 
 	gender gender() const noexcept { return m_gender; }
+
+	void add_ticket(std::shared_ptr<Ticket::Base> ticket) { m_ticket = ticket; }
+
+	void rm_ticket() {m_ticket = nullptr;}
+
+	std::shared_ptr<Ticket::Base> assigned_ticket() const {return m_ticket;}
 };
 
 } // namespace skipass

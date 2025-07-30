@@ -24,7 +24,7 @@ public:
 	constexpr virtual money_t price() const = 0;
 
 
-	int id() const noexcept;
+	int ticket_id() const noexcept;
 };
 
 } // namespace skipass::Ticket

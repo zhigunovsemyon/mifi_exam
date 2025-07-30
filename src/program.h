@@ -29,14 +29,8 @@ private:
 
 public:
 	Program(Manager & m, Interface::Base & ui) noexcept : m_manager(m), m_ui(ui), m_mode(Mode::MENU) {}
-	Program(Manager && m, Interface::Base && ui) noexcept : m_manager(m), m_ui(ui), m_mode(Mode::MENU) {}
 
-	// показать число пользователей
-	// добавить пользователя
-	// удалить пользователя
-	// сменить
-	// купить билет
-	// меню
+	Program(Manager && m, Interface::Base && ui) noexcept : m_manager(m), m_ui(ui), m_mode(Mode::MENU) {}
 
 	void run();
 };

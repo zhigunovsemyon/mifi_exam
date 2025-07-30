@@ -27,10 +27,8 @@ private:
 	Interface::Base & m_ui;
 	Mode m_mode;
 
-
-
 public:
-	Program(Manager & m, Interface::Base & ui) : m_manager(m), m_ui(ui), m_mode(Mode::MENU) {}
+	Program(Manager & m, Interface::Base & ui) noexcept : m_manager(m), m_ui(ui), m_mode(Mode::MENU) {}
 
 	// показать число пользователей
 	// добавить пользователя

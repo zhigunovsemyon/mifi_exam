@@ -7,11 +7,7 @@ namespace skipass {
 void Program::run()
 {
 	do {
-
 		switch (m_mode) {
-		// default:
-		// 	std::println("idk");
-		// 	break;
 		case Mode::USERINFO: {
 			auto curuser = m_manager.current();
 			if (!curuser)
@@ -32,10 +28,10 @@ void Program::run()
 			std::println("USERDEL mode");
 			break;
 		case Mode::USERPREV:
-			std::println("USERPREV mode");
+			m_manager.nextuser();
 			break;
 		case Mode::USERNEXT:
-			std::println("USERNEXT mode");
+			m_manager.prevuser();
 			break;
 		case Mode::BUYTICKET:
 			std::println("BUYTICKET mode");
@@ -48,7 +44,6 @@ void Program::run()
 			break;
 		}
 		m_mode = Mode::MENU;
-		// } while (m_mode != Mode::EXIT);
 	} while (true);
 }
 

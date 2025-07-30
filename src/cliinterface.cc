@@ -96,12 +96,17 @@ void CLI::invalid_user() const
 void CLI::show_user_info(client_t client) const
 {
 	auto genderText = (client->gender() == Client::gender::male) ? "мужской" : "женский";
+	auto ticket = client->assigned_ticket();
 
 	std::println();
 	std::println("Информация о текущем пользователе:");
 	std::println("Имя: {}", client->name());
 	std::println("Возраст: {}", client->age());
 	std::println("Пол: {}", genderText);
+	if (!ticket)
+		std::println("Билет не привязан");
+	else
+		std::println("Привязанный билет: {}", ticket->type_name());
 	std::println();
 }
 

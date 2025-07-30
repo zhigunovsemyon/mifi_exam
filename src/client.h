@@ -20,6 +20,7 @@ private:
 	int8_t m_age;
 	gender m_gender;
 
+public:
 	Client(std::string_view name, int age, gender gender) : m_name(name), m_gender(gender)
 	{
 		if (m_name.empty())
@@ -48,7 +49,6 @@ private:
 
 		return *this;
 	}
-public:
 
 	std::string_view name() const { return m_name; }
 

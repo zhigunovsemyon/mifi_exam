@@ -21,7 +21,7 @@ public:
 
 	auto usercount() const noexcept { return m_storage.size(); }
 
-	std::expected<client_t, std::string> adduser(std::string_view name, int age, gender gender);
+	void adduser(client_t);
 
 	void prevuser() noexcept
 	{

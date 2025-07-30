@@ -4,6 +4,7 @@
 #include <memory>
 #include <optional>
 #include <stdexcept>
+#include <string_view>
 #include <vector>
 
 namespace skipass {
@@ -20,7 +21,7 @@ public:
 
 	auto usercount() const noexcept { return m_storage.size(); }
 
-	std::expected<client_t, char const *> adduser(std::string_view name, int age, gender gender);
+	std::expected<client_t, std::string> adduser(std::string_view name, int age, gender gender);
 
 	void prevuser() noexcept
 	{

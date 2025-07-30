@@ -14,15 +14,17 @@ public:
 	};
 
 private:
+	friend class ClientManager;
 	std::string m_name;
 	int8_t m_age;
 	gender m_gender;
 
-public:
 	Client(std::string_view name, int8_t age, gender gender) : m_name(name), m_age(age), m_gender(gender)
 	{
 		if (m_age <= 0)
-			throw std::logic_error{"Неправильно указан возраст!"};
+			throw std::invalid_argument{"Неправильно указан возраст!"};
+		if (m_name.empty())
+			throw std::invalid_argument{"Не указано ФИО!"};
 	}
 
 	Client(Client const &o) : m_name(o.m_name), m_age(o.m_age), m_gender(o.m_gender) {}
@@ -42,6 +44,7 @@ public:
 
 		return *this;
 	}
+public:
 
 	std::string_view name() const { return m_name; }
 

@@ -1,5 +1,6 @@
 #pragma once
 #include <cstdint>
+#include <limits>
 #include <stdexcept>
 #include <string>
 #include <string_view>
@@ -19,12 +20,15 @@ private:
 	int8_t m_age;
 	gender m_gender;
 
-	Client(std::string_view name, int8_t age, gender gender) : m_name(name), m_age(age), m_gender(gender)
+	Client(std::string_view name, int age, gender gender) : m_name(name), m_gender(gender)
 	{
-		if (m_age <= 0)
-			throw std::invalid_argument{"Неправильно указан возраст!"};
 		if (m_name.empty())
 			throw std::invalid_argument{"Не указано ФИО!"};
+
+		if (age <= 0 || std::numeric_limits<int8_t>().max() < age)
+			throw std::invalid_argument{"Неправильно указан возраст!"};
+		else
+			m_age = (int8_t)age;
 	}
 
 	Client(Client const &o) : m_name(o.m_name), m_age(o.m_age), m_gender(o.m_gender) {}

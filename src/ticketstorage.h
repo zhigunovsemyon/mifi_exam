@@ -14,24 +14,6 @@ class TicketStorage {
 		pTicket_t m_ptr;
 		int m_cellid;
 		bool m_open;
-
-		TicketCell(pTicket_t & ptr) : m_ptr(ptr), m_cellid(sm_maxCellid++), m_open(true) {}
-
-		// int cell_id() const noexcept { return m_cellid; }
-		//
-		// bool is_open() const noexcept { return m_open; }
-		//
-		// TicketCell & open() noexcept
-		// {
-		// 	m_open = true;
-		// 	return *this;
-		// }
-		//
-		// TicketCell & close() noexcept
-		// {
-		// 	m_open = false;
-		// 	return *this;
-		// }
 	};
 
 	struct TicketSort {
@@ -50,6 +32,12 @@ class TicketStorage {
 
 public:
 	std::optional<int> insert(pTicket_t ticket);
+
+	std::optional<bool> is_open(int cellid) const noexcept;
+
+	void open(int cellid);
+
+	void close(int cellid);
 };
 
 } // namespace skipass

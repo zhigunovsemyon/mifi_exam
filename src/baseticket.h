@@ -1,8 +1,8 @@
 #pragma once
 #include "client.h"
-
 #include <memory>
 #include <optional>
+
 namespace skipass::Ticket {
 
 class Base {
@@ -25,10 +25,11 @@ public:
 	// Стоимость билета
 	constexpr virtual money_t price() const = 0;
 
-
 	int ticket_id() const noexcept;
 
 	std::optional<int> cell_id() const noexcept;
+
+	void change_cell_id(int newCellid) noexcept {m_cellid = newCellid;}
 };
 
 } // namespace skipass::Ticket

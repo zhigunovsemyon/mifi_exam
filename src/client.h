@@ -15,7 +15,6 @@ public:
 	};
 
 private:
-	friend class ClientManager;
 	std::string m_name;
 	int8_t m_age;
 	gender m_gender;

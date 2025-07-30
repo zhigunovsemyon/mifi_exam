@@ -1,11 +1,16 @@
 #pragma once
 #include <cstdint>
 #include <limits>
+#include <memory>
 #include <stdexcept>
 #include <string>
 #include <string_view>
 
 namespace skipass {
+
+namespace Ticket {
+class Base;
+}
 
 class Client {
 public:
@@ -16,11 +21,12 @@ public:
 
 private:
 	std::string m_name;
+	std::shared_ptr<Ticket::Base> m_ticket;
 	int8_t m_age;
 	gender m_gender;
 
 public:
-	Client(std::string_view name, int age, gender gender) : m_name(name), m_gender(gender)
+	Client(std::string_view name, int age, gender gender) : m_name(name), m_ticket{nullptr}, m_gender(gender)
 	{
 		if (m_name.empty())
 			throw std::invalid_argument{"Не указано ФИО!"};

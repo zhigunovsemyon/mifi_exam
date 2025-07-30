@@ -112,7 +112,7 @@ void CLI::show_user_info(client_t client) const
 
 using gender = enum Client::gender;
 
-std::optional<gender> str_to_gender(std::string_view str)
+static std::optional<gender> str_to_gender(std::string_view str)
 {
 	if (str == "М" || str == "м")
 		return Client::gender::male;

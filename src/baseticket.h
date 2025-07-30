@@ -25,6 +25,9 @@ public:
 	// Стоимость билета
 	constexpr virtual money_t price() const = 0;
 
+	//Название типа билета
+	constexpr virtual char const * type_name() const = 0;
+
 	int ticket_id() const noexcept;
 
 	std::optional<int> cell_id() const noexcept;

@@ -5,6 +5,7 @@
 namespace skipass::Ticket {
 
 class TimeLimited : public Expirable {
+	static constexpr auto sm_name{"ограниченный по времени"};
 	static constexpr money_t sm_price = 300;
 	static constexpr std::chrono::seconds sm_timeOfTicket = std::chrono::days(1) - std::chrono::seconds(1);
 
@@ -27,6 +28,8 @@ public:
 
 	// Остаток в виде строки
 	std::string remainder() const override;
+
+	constexpr char const * type_name() const override {return sm_name;}
 };
 
 } // namespace skipass::Ticket

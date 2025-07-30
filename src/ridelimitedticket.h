@@ -6,6 +6,7 @@ namespace skipass::Ticket {
 class RideLimited : public Expirable {
 	static constexpr money_t sm_price = 300;
 	static constexpr int sm_ridesOfTicket = 7;
+	static constexpr auto sm_name{"ограниченный по поездкам"};
 
 	int m_ridesRemainder;
 
@@ -21,6 +22,8 @@ public:
 
 	// Остаток в виде строки
 	std::string remainder() const override;
+
+	constexpr char const * type_name() const override {return sm_name;}
 };
 
 } // namespace skipass::Ticket

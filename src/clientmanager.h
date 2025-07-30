@@ -23,31 +23,13 @@ public:
 
 	void adduser(client_t);
 
-	void prevuser() noexcept
-	{
-		if (m_cur != m_storage.begin())
-			--m_cur;
-	}
+	void prevuser() noexcept;
 
-	void nextuser() noexcept
-	{
-		if (std::next(m_cur) != m_storage.end())
-			++m_cur;
-	}
+	void nextuser() noexcept;
 
-	void deluser() noexcept
-	{
-		m_cur = m_storage.erase(m_cur);
-		if (!m_storage.empty() && m_cur == m_storage.end())
-			m_cur = m_storage.begin();
-	}
+	void deluser() noexcept;
 
-	std::optional<client_t> current()
-	{
-		if (m_storage.end() == m_cur)
-			return {};
-		return *m_cur;
-	}
+	std::optional<client_t> current();
 };
 
 } // namespace skipass

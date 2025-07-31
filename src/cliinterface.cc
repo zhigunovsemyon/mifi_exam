@@ -1,5 +1,6 @@
 #include "cliinterface.h"
 #include "client.h"
+#include "expirableticket.h"
 #include "program.h"
 #include <algorithm>
 #include <iostream>
@@ -94,6 +95,19 @@ void CLI::invalid_user() const
 	std::println("Пользователь не был выбран!");
 }
 
+static void show_ticket_info(std::shared_ptr<Ticket::Base> ticket)
+{
+	if (!ticket) {
+		std::println("Билет не привязан");
+		return;
+	}
+	std::println("Привязанный билет: {}", ticket->type_name());
+
+	if (auto expTicket = dynamic_cast<Ticket::Expirable *>(ticket.get()))
+		std::println("Остаток: {}", expTicket->remainder());
+	// сделать вывод для служебного и безлимитного тикетов
+}
+
 void CLI::show_user_info(client_t client) const
 {
 	auto genderText = (client->gender() == Client::gender::male) ? "мужской" : "женский";
@@ -104,10 +118,7 @@ void CLI::show_user_info(client_t client) const
 	std::println("Имя: {}", client->name());
 	std::println("Возраст: {}", client->age());
 	std::println("Пол: {}", genderText);
-	if (!ticket)
-		std::println("Билет не привязан");
-	else
-		std::println("Привязанный билет: {}", ticket->type_name());
+	show_ticket_info(ticket);
 	std::println();
 }
 
@@ -154,16 +165,16 @@ std::optional<CLI::client_t> CLI::retrieve_user_info() const
 int CLI::select_new_ticket_type(std::span<std::string_view> typenames) const
 {
 	int ret{-1};
-	for(int i{}; auto n : typenames)
-		std::println("{}. {}", ++i, n); //счёт от 1
+	for (int i{}; auto n : typenames)
+		std::println("{}. {}", ++i, n); // счёт от 1
 	std::print("-> ");
 	std::cin >> ret;
-	if(!std::cin || ret < 1)
+	if (!std::cin || ret < 1)
 		return -1;
-	if(static_cast<size_t>(ret) > typenames.size())
+	if (static_cast<size_t>(ret) > typenames.size())
 		return -1;
 
-	return ret - 1;//от нуля (индекс фабрики)
+	return ret - 1; // от нуля (индекс фабрики)
 }
 
 } // namespace skipass::Interface

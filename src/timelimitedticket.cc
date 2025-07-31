@@ -1,6 +1,7 @@
 #include "timelimitedticket.h"
 #include <chrono>
 #include <format>
+#include <optional>
 
 namespace skipass::Ticket {
 
@@ -15,10 +16,13 @@ Expirable::change_t TimeLimited::refill(money_t m)
 }
 
 // Остаток в виде строки
-std::string TimeLimited::remainder() const
+std::optional<std::string> TimeLimited::remainder() const
 {
 	auto now = std::chrono::time_point_cast<std::chrono::seconds>(std::chrono::system_clock::now());
-	return std::format("{:%T}", m_expireDate - now);
+	if (now < m_expireDate)
+		return std::format("{:%T}", m_expireDate - now);
+	else 
+		return {};
 }
 
 } // namespace skipass::Ticket

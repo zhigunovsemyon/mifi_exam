@@ -1,5 +1,6 @@
 #pragma once
 #include "baseticket.h"
+#include <optional>
 #include <string>
 
 namespace skipass::Ticket {
@@ -16,7 +17,7 @@ public:
 	virtual change_t refill(money_t m) = 0;
 
 	// Остаток в виде строки
-	virtual std::string remainder() const = 0;
+	virtual std::optional<std::string> remainder() const = 0;
 };
 
 } // namespace skipass::Ticket

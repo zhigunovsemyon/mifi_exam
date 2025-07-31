@@ -19,10 +19,7 @@ class TimeLimited : public Expirable {
 public:
 	~TimeLimited() override = default;
 
-	TimeLimited(pClient_t client)
-		: Expirable(client),
-		  m_expireDate(sm_timeOfTicket +
-			       std::chrono::time_point_cast<std::chrono::seconds>(std::chrono::system_clock::now()))
+	TimeLimited(pClient_t client) : Expirable(client), m_expireDate(sm_timeOfTicket)
 	{
 	}
 
@@ -32,7 +29,7 @@ public:
 	change_t refill(money_t m) override;
 
 	// Остаток в виде строки
-	std::string remainder() const override;
+	std::optional<std::string> remainder() const override;
 
 	constexpr char const * type_name() const override { return sm_name; }
 };

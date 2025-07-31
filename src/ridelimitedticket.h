@@ -1,6 +1,7 @@
 #pragma once
 #include "expirableticket.h"
 #include <memory>
+#include <optional>
 
 namespace skipass::TicketFactory {
 class RideLimited;
@@ -19,7 +20,7 @@ class RideLimited : public Expirable {
 public:
 	~RideLimited() override = default;
 
-	RideLimited(pClient_t client) : Expirable(client), m_ridesRemainder(sm_ridesOfTicket) {}
+	RideLimited(pClient_t client) : Expirable(client), m_ridesRemainder(0) {}
 
 	constexpr money_t price() const override { return sm_price; }
 
@@ -27,7 +28,7 @@ public:
 	change_t refill(money_t m) override;
 
 	// Остаток в виде строки
-	std::string remainder() const override;
+	std::optional<std::string> remainder() const override;
 
 	constexpr char const * type_name() const override { return sm_name; }
 };

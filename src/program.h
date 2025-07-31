@@ -27,6 +27,7 @@ private:
 	Interface::Base & m_ui;
 	Mode m_mode;
 
+	void ticket_buying();
 public:
 	Program(Manager & m, Interface::Base & ui) noexcept : m_manager(m), m_ui(ui), m_mode(Mode::MENU) {}
 

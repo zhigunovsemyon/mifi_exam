@@ -1,6 +1,7 @@
 #include "cliinterface.h"
 #include "client.h"
 #include "program.h"
+#include <algorithm>
 #include <iostream>
 #include <memory>
 #include <optional>
@@ -148,6 +149,21 @@ std::optional<CLI::client_t> CLI::retrieve_user_info() const
 		print_error_message(std::string{argErr.what()});
 		return std::nullopt;
 	}
+}
+
+int CLI::select_new_ticket_type(std::span<std::string_view> typenames) const
+{
+	int ret{-1};
+	for(int i{}; auto n : typenames)
+		std::println("{}. {}", ++i, n); //счёт от 1
+	std::print("-> ");
+	std::cin >> ret;
+	if(!std::cin || ret < 1)
+		return -1;
+	if(static_cast<size_t>(ret) > typenames.size())
+		return -1;
+
+	return ret - 1;//от нуля (индекс фабрики)
 }
 
 } // namespace skipass::Interface

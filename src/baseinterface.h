@@ -4,6 +4,8 @@
 #include <cstddef>
 #include <memory>
 #include <optional>
+#include <span>
+#include <string_view>
 
 namespace skipass::Interface {
 
@@ -35,6 +37,8 @@ public:
 	virtual std::optional<client_t> retrieve_user_info() const = 0;
 
 	virtual void print_error_message(std::string_view msg) const = 0;
+
+	virtual int select_new_ticket_type(std::span<std::string_view> typenames) const = 0;
 };
 
 } // namespace skipass::Interface

@@ -103,8 +103,13 @@ static void show_ticket_info(std::shared_ptr<Ticket::Base> ticket)
 	}
 	std::println("Привязанный билет: {}", ticket->type_name());
 
-	if (auto expTicket = dynamic_cast<Ticket::Expirable *>(ticket.get()))
-		std::println("Остаток: {}", expTicket->remainder());
+	if (auto expTicket = dynamic_cast<Ticket::Expirable *>(ticket.get())){
+		auto remainder = expTicket->remainder();
+		if (!remainder)
+			std::println("Билет недействителен! Пополните, чтобы использовать");
+		else
+			std::println("Остаток: {}", *remainder);
+	}
 	// сделать вывод для служебного и безлимитного тикетов
 }
 

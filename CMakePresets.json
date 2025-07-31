@@ -6,10 +6,6 @@
             "hidden": true,
             "generator": "Unix Makefiles",
             "binaryDir": "${sourceDir}/build/${presetName}",
-            "installDir": "${sourceDir}/install/${presetName}",
-            "cacheVariables": {
-                "CMAKE_CXX_COMPILER": "clang++"
-            },
             "condition": {
                 "type": "equals",
                 "lhs": "${hostSystemName}",
@@ -41,7 +37,6 @@
             "hidden": true,
             "generator": "Ninja",
             "binaryDir": "${sourceDir}/build/${presetName}",
-            "installDir": "${sourceDir}/install/${presetName}",
             "cacheVariables": {
                 "CMAKE_CXX_COMPILER": "cl.exe"
             },

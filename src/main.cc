@@ -1,6 +1,7 @@
 #include "cliinterface.h"
 #include "program.h"
 #include "ridelimitedticket.h"
+#include "timelimitedticket.h"
 #include <cassert>
 #include <cstdlib>
 #include <exception>
@@ -9,7 +10,8 @@
 int main()
 try {
 	skipass::TicketFactory::RideLimited rl;
-	std::array<skipass::TicketFactory::Base *, 1> ticketFactories{&rl};
+	skipass::TicketFactory::TimeLimited tl;
+	std::array<skipass::TicketFactory::Base *, 2> ticketFactories{&rl, &tl};
 	skipass::Interface::CLI ui;
 	skipass::Manager manager{ticketFactories};
 	skipass::Program{manager, ui}.run();
